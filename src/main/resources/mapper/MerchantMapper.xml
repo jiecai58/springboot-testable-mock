@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.testable.mock.mapper.MerchantMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.spring.testable.mock.pojo.entity.Merchant">
+        <id column="id" property="id" />
+        <result column="account" property="account" />
+        <result column="bak_account" property="bakAccount" />
+        <result column="bak_account_id" property="bakAccountId" />
+        <result column="nickname" property="nickname" />
+        <result column="freeze_dead_time" property="freezeDeadTime" />
+        <result column="level" property="level" />
+        <result column="status" property="status" />
+        <result column="authority" property="authority" />
+        <result column="remark" property="remark" />
+        <result column="is_deleted" property="isDeleted" />
+        <result column="created_time" property="createdTime" />
+        <result column="updated_time" property="updatedTime" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id , account, bak_account,bak_account_id, nickname,  freeze_dead_time, level,status, authority, remark, is_deleted, created_time, updated_time
+    </sql>
+
+    <select id="all" resultMap="BaseResultMap">
+        select * from merchant
+    </select>
+
+
+</mapper>

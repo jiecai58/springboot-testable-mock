@@ -1,0 +1,57 @@
+spring:
+  application:
+    name: testable-mock-dome
+  jackson:
+    time-zone: Asia/Shanghai
+  datasource:
+    druid:
+      db-type: com.alibaba.druid.pool.DruidDataSource
+      url: jdbc:mysql://172.16.171.6:3306/testable-mock?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&useSSL=false
+      username: work
+      password: work123!
+      #初始化时建立物理连接的个数
+      initial-size: 5
+      #最小连接池数量
+      min-idle: 5
+      #最大连接池数量
+      max-active: 20
+      #获取连接时最大等待时间，单位毫秒
+      max-wait: 60000
+      #配置检测可以关闭的空闲连接间隔时间
+      time-between-eviction-runs-millis: 60000
+      # 配置连接在池中的最小生存时间
+      min-evictable-idle-time-millis: 300000
+      max-evictable-idle-time-millis: 400000
+      validation-query: SELECT 1 FROM DUAL
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+      #是否缓存preparedStatement，也就是PSCache,PSCache对支持游标的数据库性能提升巨大，比如说oracle,在mysql下建议关闭。
+      pool-prepared-statements: false
+      #要启用PSCache，必须配置大于0，当大于0时，poolPreparedStatements自动触发修改为true。在Druid中，不会存在Oracle下PSCache占用内存过多的问题，可以把这个数值配置大一些，比如说100
+      max-open-prepared-statements: -1
+      max-pool-prepared-statement-per-connection-size: 20
+      #Spring监控AOP切入点，如x.y.z.service.*,配置多个英文逗号分隔
+      aop-patterns: com.bitshares.otc.api.web..*
+      #监控统计的stat,以及防sql注入的wall
+      filter:
+        commons-log:
+          connection-logger-name: stat,wall,log4j
+        stat:
+          log-slow-sql: true
+          slow-sql-millis: 2000
+      # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
+      connection-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=1000
+      # 合并多个DruidDataSource的监控数据
+      use-global-data-source-stat: true
+  output:
+    ansi:
+      enabled: always
+
+server:
+  port: 8089
+
+mybatis-plus:
+  mapper-locations: classpath:mapper/*.xml
+
+tokensecret: hello
