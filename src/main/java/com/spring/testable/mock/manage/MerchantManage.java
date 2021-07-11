@@ -17,8 +17,8 @@ public class MerchantManage {
     private MerchantDao merchantDao;
 
     public Merchant getMerchantInfoByAccount(String account){
-        //return merchantDao.getMerchantInfoByAccount(account);
-        return getMerchantInfo(account);
+        return merchantDao.getMerchantInfoByAccount(account);
+        //return getMerchantInfo(account);
     }
 
     private Merchant getMerchantInfo(String account){

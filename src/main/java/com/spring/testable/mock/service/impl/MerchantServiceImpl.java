@@ -2,7 +2,6 @@ package com.spring.testable.mock.service.impl;
 
 import com.spring.testable.mock.common.enums.ErrorCode;
 import com.spring.testable.mock.common.exceptions.BusinessException;
-import com.spring.testable.mock.dao.MerchantDao;
 import com.spring.testable.mock.manage.MerchantManage;
 import com.spring.testable.mock.pojo.dto.UserDto;
 import com.spring.testable.mock.pojo.entity.Merchant;
@@ -24,14 +23,10 @@ public class MerchantServiceImpl implements MerchantService {
     @Resource
     private MerchantManage merchantManage;
 
-    @Resource
-    private MerchantDao merchantDao;
-
     @Override
     public MerchantVo detail(UserDto userDto) {
         MerchantVo merchantVo = new MerchantVo();
         Merchant merchant = merchantManage.getMerchantInfoByAccount(userDto.getAccount());
-        merchantDao.getMerchantInfoByAccount(userDto.getAccount());
         if(merchant == null ){
             throw new BusinessException(ErrorCode.ERROR_MERCHANT_NOT_EXIST);
         }

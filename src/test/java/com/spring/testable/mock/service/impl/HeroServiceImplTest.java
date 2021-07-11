@@ -1,6 +1,8 @@
 package com.spring.testable.mock.service.impl;
 
+import com.alibaba.testable.core.annotation.MockDiagnose;
 import com.alibaba.testable.core.annotation.MockWith;
+import com.alibaba.testable.core.model.LogLevel;
 import com.spring.testable.mock.BaseTest;
 import com.spring.testable.mock.remote.feign.WeatherClientMock;
 import com.spring.testable.mock.service.HeroService;
@@ -22,6 +24,7 @@ public class HeroServiceImplTest extends BaseTest {
     private HeroService heroService;
 
     //Mock方法的复用可以通过Mock容器类的继承来实现，父类中定义的所有Mock方法都会在子类中自然存在
+    @MockDiagnose(LogLevel.VERBOSE)
     public static class Mock extends WeatherClientMock {
 
     }

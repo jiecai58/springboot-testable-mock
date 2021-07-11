@@ -35,7 +35,11 @@ public class HeroServiceImpl implements HeroService {
         sb.append("人物：").append(hero.getHeroName()).append("\n");
         sb.append("技能：").append(hero.getSkill()).append("\n");
         sb.append("地点：").append(weather.getCityInfo().getCity()).append("\n");
-        sb.append("天气：").append(weather.getData().getYesterday().getNotice());
+        WeatherExample.Forecast forecast = weather.getData().getForecast().get(0);
+        sb.append("天气：").append(forecast.getType() + ","+
+                forecast.getLow() + "," +forecast.getHigh()
+                        + forecast.getFx() + forecast.getFl() +","+ forecast.getNotice()
+        );
 
         return sb.toString();
     }
