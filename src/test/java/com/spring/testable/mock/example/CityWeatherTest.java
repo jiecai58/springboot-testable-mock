@@ -33,7 +33,6 @@ public class CityWeatherTest extends BaseTest {
     public void test_public() {
 
         String shanghai = cityWeather.queryShangHaiWeather();
-        System.out.println(shanghai);
         assertEquals("上海市: this is from mock", shanghai);
     }
 
@@ -44,7 +43,6 @@ public class CityWeatherTest extends BaseTest {
     public void test_private() {
 
         String hefei = (String) PrivateAccessor.invoke(cityWeather, "queryHeFeiWeather");
-        System.out.println(hefei);
         assertEquals("合肥市: this is from mock", hefei);
     }
 
@@ -55,7 +53,6 @@ public class CityWeatherTest extends BaseTest {
     public void test_static() {
 
         String beijing = CityWeather.queryBeiJingWeather();
-        System.out.println(beijing);
         assertEquals("北京市: this is from mock", beijing);
     }
 
