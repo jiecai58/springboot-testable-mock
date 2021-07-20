@@ -3,8 +3,8 @@ package com.spring.testable.mock.example;
 import cn.hutool.core.map.MapUtil;
 import com.spring.testable.mock.common.http.feign.WeatherExample;
 import feign.Feign;
-import feign.codec.Decoder;
-import feign.codec.Encoder;
+import feign.jackson.JacksonDecoder;
+import feign.jackson.JacksonEncoder;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -24,22 +24,29 @@ public class CityWeather {
             .build();
 
     private static WeatherApi weatherApi = Feign.builder()
-            .encoder(new Encoder.Default())
-            .decoder(new Decoder.Default())
+            .encoder(new JacksonEncoder())
+            .decoder(new JacksonDecoder())
             .target(WeatherApi.class, API_URL);
 
     public String queryShangHaiWeather() {
         WeatherExample.Response response = weatherApi.query(SHANG_HAI);
-        return response.getCityInfo().getCity() + ": " + response.getData().getYesterday().getNotice();
+        return result(response);
     }
 
     private String queryHeFeiWeather() {
         WeatherExample.Response response = weatherApi.query(HE_FEI);
-        return response.getCityInfo().getCity() + ": " + response.getData().getYesterday().getNotice();
+        return result(response);
     }
 
     public static String queryBeiJingWeather() {
         WeatherExample.Response response = weatherApi.query(BEI_JING);
-        return response.getCityInfo().getCity() + ": " + response.getData().getYesterday().getNotice();
+        return result(response);
+    }
+
+    private static String result( WeatherExample.Response response){
+        WeatherExample.Forecast forecast = response.getData().getForecast().get(0);
+        return response.getCityInfo().getCity() + ": " + forecast.getType() + ","+
+                forecast.getLow() + "," +forecast.getHigh()
+                + forecast.getFx() + forecast.getFl() +","+ forecast.getNotice();
     }
 }

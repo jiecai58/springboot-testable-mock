@@ -30,16 +30,11 @@ public class HeroServiceImpl implements HeroService {
             return String.format("heroId为%d不存在", id);
         }
         WeatherExample.Response weather = weatherClient.query(cityCode);
-
         StringBuilder sb = new StringBuilder();
         sb.append("人物：").append(hero.getHeroName()).append("\n");
         sb.append("技能：").append(hero.getSkill()).append("\n");
         sb.append("地点：").append(weather.getCityInfo().getCity()).append("\n");
-        WeatherExample.Forecast forecast = weather.getData().getForecast().get(0);
-        sb.append("天气：").append(forecast.getType() + ","+
-                forecast.getLow() + "," +forecast.getHigh()
-                        + forecast.getFx() + forecast.getFl() +","+ forecast.getNotice()
-        );
+        sb.append("天气：").append(weather.getData().getYesterday().getNotice());
 
         return sb.toString();
     }

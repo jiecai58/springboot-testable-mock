@@ -37,7 +37,7 @@ public class HeroServiceImplTest extends BaseTest {
 
     @Test
     public void should_story() {
-        String story = heroService.story(1L, SHANG_HAI);
+        String story = heroService.story(2L, SHANG_HAI);
         System.out.println(story);
     }
 

@@ -6,15 +6,19 @@ import com.spring.testable.mock.pojo.entity.Hero;
 
 public class HeroManageMock {
 
-    public static final String MOCK_ACCOUNT = "1024";
+    public static final Long MOCK_ACCOUNT = 1L;
 
     @MockMethod
     private Hero heroinfo(HeroDao self, Long id){
-        Hero hero = new Hero();
-        hero.setHeroName("mock hero");
-        hero.setId(id);
-        hero.setSkill("mock skill");
-        return hero;
+
+        if(MOCK_ACCOUNT.equals(id)){
+            Hero hero = new Hero();
+            hero.setHeroName("mock hero");
+            hero.setId(id);
+            hero.setSkill("mock skill");
+            return hero;
+        }
+        return self.heroinfo(id);
 
     }
 }
