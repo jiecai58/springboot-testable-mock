@@ -18,8 +18,16 @@ public class CityWeatherTest extends BaseTest {
             // mock天气接口调用返回的结果
             response.setCityInfo(new WeatherExample.CityInfo().setCity(
                     CityWeather.CITY_CODE.getOrDefault(cityCode, cityCode)));
-            response.setData(new WeatherExample.Data().setYesterday(
-                    new WeatherExample.Forecast().setNotice("this is from mock")));
+            ArrayList<WeatherExample.Forecast> forecasts = new ArrayList<>();
+            WeatherExample.Forecast forecast = new WeatherExample.Forecast();
+            forecast.setFl("");
+            forecast.setType("");
+            forecast.setLow("");
+            forecast.setHigh("");
+            forecast.setFx("");
+            forecast.setNotice("this is from mock");
+            forecasts.add(forecast);
+            response.setData(new WeatherExample.Data().setForecast(forecasts));
             return response;
         }*/
     }
