@@ -18,6 +18,7 @@ import java.util.List;
  * <p>
  * 更多城市 https://github.com/baichengzhou/weather.api/blob/master/src/main/resources/citycode-2019-08-23.json
  * 注意是找的是city_code，而不是id
+ * @author caijie
  */
 public class WeatherExample {
 
@@ -33,14 +34,20 @@ public class WeatherExample {
     }
 
     public static void main(String[] args) {
-        WeatherApi weatherApi = Feign.builder()
-                .target(WeatherApi.class, API_URL);
+        WeatherApi weatherApi = Feign.builder().target(WeatherApi.class, API_URL);
 
-        Response shangHaiWeacher = weatherApi.query(SHANG_HAI);
-        Response heFeiWeacher = weatherApi.query(HE_FEI);
+        Response shangHaiWeather = weatherApi.query(SHANG_HAI);
+        Response heFeiWeather = weatherApi.query(HE_FEI);
 
-        System.out.println(shangHaiWeacher.getData().getYesterday().getNotice());
-        System.out.println(heFeiWeacher.getData().getYesterday().getNotice());
+        System.out.println(result(shangHaiWeather));
+        System.out.println(result(heFeiWeather));
+    }
+
+    private static String result(Response response){
+        WeatherExample.Forecast forecast = response.getData().getForecast().get(0);
+        return response.getCityInfo().getCity() + ": " + forecast.getType() + ","+
+                forecast.getLow() + "," +forecast.getHigh()
+                + forecast.getFx() + forecast.getFl() +","+ forecast.getNotice();
     }
 
     @Getter
