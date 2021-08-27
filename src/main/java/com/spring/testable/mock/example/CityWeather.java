@@ -45,8 +45,20 @@ public class CityWeather {
 
     private static String result( WeatherExample.Response response){
         WeatherExample.Forecast forecast = response.getData().getForecast().get(0);
-        return response.getCityInfo().getCity() + ": " + forecast.getType() + ","+
-                forecast.getLow() + "," +forecast.getHigh()
+        return response.getCityInfo().getCity() + ": " + forecast.getYmd()+","+ forecast.getWeek()+","+forecast.getType() + ","+
+                forecast.getLow() + "," +forecast.getHigh()+","
                 + forecast.getFx() + forecast.getFl() +","+ forecast.getNotice();
+    }
+
+    public static void main(String[] args) {
+        CityWeather cityWeather = new CityWeather();
+
+        String shanghai = cityWeather.queryShangHaiWeather();
+        String hefei = cityWeather.queryHeFeiWeather();
+        String beijing = CityWeather.queryBeiJingWeather();
+
+        System.out.println(shanghai);
+        System.out.println(hefei);
+        System.out.println(beijing);
     }
 }
