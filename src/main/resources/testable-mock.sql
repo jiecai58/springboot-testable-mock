@@ -67,7 +67,7 @@ COMMIT;
 -- ----------------------------
 DROP TABLE IF EXISTS `hero`;
 CREATE TABLE `hero` (
-  `id` int NOT NULL,
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT 'id主键',
   `hero_name` varchar(32) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `skill` varchar(64) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `book_id` int DEFAULT NULL,

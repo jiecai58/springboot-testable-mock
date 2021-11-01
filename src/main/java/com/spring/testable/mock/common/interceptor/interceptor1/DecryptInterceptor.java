@@ -3,19 +3,14 @@ package com.spring.testable.mock.common.interceptor.interceptor1;
 
 import com.spring.testable.mock.common.interceptor.interceptor1.annotation.SensitiveData;
 import com.spring.testable.mock.common.interceptor.interceptor1.encrypt.DecryptUtil;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.executor.resultset.ResultSetHandler;
-import org.apache.ibatis.plugin.Interceptor;
-import org.apache.ibatis.plugin.Intercepts;
-import org.apache.ibatis.plugin.Invocation;
-import org.apache.ibatis.plugin.Plugin;
-import org.apache.ibatis.plugin.Signature;
+import org.apache.ibatis.plugin.*;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
-import java.beans.Statement;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Properties;
@@ -23,10 +18,9 @@ import java.util.Properties;
 /**
  * @author leo
  */
-@Slf4j
 @Component
 @Intercepts({
-        @Signature(type = ResultSetHandler.class, method = "handleResultSets", args = {Statement.class})
+        @Signature(type = ResultSetHandler.class,method ="handleResultSets",args= {Statement.class})
 })
 public class DecryptInterceptor implements Interceptor {
 

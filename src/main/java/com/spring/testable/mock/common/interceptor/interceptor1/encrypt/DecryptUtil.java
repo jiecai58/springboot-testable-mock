@@ -12,5 +12,5 @@ public interface DecryptUtil {
      * @return T
      * @throws IllegalAccessException 字段不可访问异常
      */
-    <T> T decrypt(T result) throws IllegalAccessException;
+    <T> T decrypt(T result) throws Exception;
 }

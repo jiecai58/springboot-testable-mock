@@ -28,7 +28,7 @@ import java.util.Properties;
  *     type 属性指定当前拦截器使用StatementHandler 、ResultSetHandler、ParameterHandler，Executor的一种
  *     method 属性指定使用以上四种类型的具体方法（可进入class内部查看其方法）。
  *     args 属性指定预编译语句
- * @author : tanzj
+ * @author : caijie
  * @date : 2020/1/19.
  */
 @Slf4j

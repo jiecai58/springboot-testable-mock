@@ -14,5 +14,5 @@ public interface EncryptUtil {
      * @return T
      * @throws IllegalAccessException 字段不可访问异常
      */
-    <T> T encrypt(Field[] declaredFields, T paramsObject) throws IllegalAccessException;
+    <T> T encrypt(Field[] declaredFields, T paramsObject) throws Exception;
 }

@@ -1,5 +1,9 @@
 package com.spring.testable.mock.common.interceptor.interceptor1.encrypt.aes;
 
+import com.spring.testable.mock.common.AESType;
+import com.spring.testable.mock.common.AESUtil;
+import com.spring.testable.mock.common.EncodeType;
+import com.spring.testable.mock.common.TypeConvert;
 import com.spring.testable.mock.common.interceptor.interceptor1.annotation.SensitiveField;
 import com.spring.testable.mock.common.interceptor.interceptor1.encrypt.EncryptUtil;
 import org.springframework.stereotype.Component;
@@ -19,7 +23,7 @@ public class AESEncrypt implements EncryptUtil {
      * @throws IllegalAccessException 字段不可访问异常
      */
     @Override
-    public <T> T encrypt(Field[] declaredFields, T paramsObject) throws IllegalAccessException {
+    public <T> T encrypt(Field[] declaredFields, T paramsObject) throws Exception {
         for (Field field : declaredFields) {
             //取出所有被EncryptDecryptField注解的字段
             SensitiveField sensitiveField = field.getAnnotation(SensitiveField.class);
@@ -28,9 +32,10 @@ public class AESEncrypt implements EncryptUtil {
                 Object object = field.get(paramsObject);
                 //暂时只实现String类型的加密
                 if (object instanceof String) {
-                    String value = (String) object;
+                    //ECB/PKCS5Padding
+                    byte[] encodeByte = AESUtil.encodeByte((String) object, AESUtil.KEY, null, AESType.AES_128, EncodeType.AES_DEFAULT);
                     //加密  这里我使用自定义的AES加密工具
-                    field.set(paramsObject, AESUtil.encrypt(value));
+                    field.set(paramsObject, TypeConvert.byte2Base64StringFun(encodeByte));
                 }
             }
         }

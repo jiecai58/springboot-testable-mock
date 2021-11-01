@@ -1,5 +1,9 @@
 package com.spring.testable.mock.common.interceptor.interceptor1.encrypt.aes;
 
+import com.spring.testable.mock.common.AESType;
+import com.spring.testable.mock.common.AESUtil;
+import com.spring.testable.mock.common.EncodeType;
+import com.spring.testable.mock.common.TypeConvert;
 import com.spring.testable.mock.common.interceptor.interceptor1.annotation.SensitiveField;
 import com.spring.testable.mock.common.interceptor.interceptor1.encrypt.DecryptUtil;
 import org.springframework.stereotype.Service;
@@ -21,7 +25,7 @@ public class AESDecrypt implements DecryptUtil {
      * @throws IllegalAccessException 字段不可访问异常
      */
     @Override
-    public <T> T decrypt(T result) throws IllegalAccessException {
+    public <T> T decrypt(T result) throws Exception {
         //取出resultType的类
         Class<?> resultClass = result.getClass();
         Field[] declaredFields = resultClass.getDeclaredFields();
@@ -33,9 +37,10 @@ public class AESDecrypt implements DecryptUtil {
                 Object object = field.get(result);
                 //只支持String的解密
                 if (object instanceof String) {
-                    String value = (String) object;
+                    //ECB/PKCS5Padding
+                    byte[] decodeByte = AESUtil.decodeByte(TypeConvert.base64String2ByteFun((String) object), AESUtil.KEY, null, AESType.AES_128, EncodeType.AES_DEFAULT);
                     //对注解的字段进行逐一解密
-                    field.set(result, AESUtil.decrypt(value));
+                    field.set(result, new String(decodeByte, AESUtil.CHARSET));
                 }
             }
         }

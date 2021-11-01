@@ -4,6 +4,7 @@ import com.alibaba.testable.core.annotation.MockDiagnose;
 import com.alibaba.testable.core.annotation.MockWith;
 import com.alibaba.testable.core.model.LogLevel;
 import com.spring.testable.mock.BaseTest;
+import com.spring.testable.mock.pojo.entity.Hero;
 import com.spring.testable.mock.remote.feign.WeatherClientMock;
 import com.spring.testable.mock.service.HeroService;
 import org.junit.Test;
@@ -31,7 +32,7 @@ public class HeroServiceImplTest extends BaseTest {
 
     @Test
     public void storyTest() {
-        String story = heroService.story(1L, MOCK_CITY_CODE);
+        String story = heroService.story(8L, MOCK_CITY_CODE);
         System.out.println(story);
     }
 
@@ -39,6 +40,23 @@ public class HeroServiceImplTest extends BaseTest {
     public void should_story() {
         String story = heroService.story(1L, SHANG_HAI);
         System.out.println(story);
+    }
+
+    @Test
+    public void insert() {
+        Hero hero = new Hero();
+        hero.setHeroName("途虎养车");
+        hero.setSkill("系统设计2");
+        heroService.insert(hero);
+    }
+
+    @Test
+    public void update() {
+        Hero hero = new Hero();
+        hero.setId(7L);
+        hero.setHeroName("caijie2");
+        hero.setSkill("系统设计,代码编写");
+        heroService.update(hero);
     }
 
 }
