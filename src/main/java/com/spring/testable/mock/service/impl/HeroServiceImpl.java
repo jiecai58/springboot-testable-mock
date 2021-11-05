@@ -38,4 +38,14 @@ public class HeroServiceImpl implements HeroService {
 
         return sb.toString();
     }
+
+    @Override
+    public boolean insert(Hero hero){
+        return heroManage.insert(hero);
+    }
+
+    @Override
+    public boolean update(Hero hero){
+        return heroManage.update(hero);
+    }
 }

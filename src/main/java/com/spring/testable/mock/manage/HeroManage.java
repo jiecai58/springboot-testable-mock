@@ -19,4 +19,14 @@ public class HeroManage {
         return heroDao.heroinfo(id);
     }
 
+
+    public boolean insert(Hero hero){
+        return heroDao.insert(hero);
+    }
+
+
+    public boolean update(Hero hero){
+        return heroDao.update(hero);
+    }
+
 }

@@ -7,4 +7,8 @@ import org.apache.ibatis.annotations.Mapper;
 public interface HeroDao extends BaseDao<Hero> {
 
     Hero heroinfo(Long id);
+
+    boolean insert(Hero hero);
+
+    boolean update(Hero hero);
 }
