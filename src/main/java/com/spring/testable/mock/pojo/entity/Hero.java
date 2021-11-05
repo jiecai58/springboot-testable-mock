@@ -3,6 +3,8 @@ package com.spring.testable.mock.pojo.entity;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.tuhu.qpl.interceptor.encryption.annotation.SensitiveData;
+import com.tuhu.qpl.interceptor.encryption.annotation.SensitiveField;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
@@ -12,6 +14,7 @@ import lombok.experimental.Accessors;
  */
 @Data
 @NoArgsConstructor
+@SensitiveData
 @Accessors(chain = true)
 @TableName("hero")
 public class Hero {
@@ -19,6 +22,7 @@ public class Hero {
     @TableId("id")
     protected Long id;
 
+    @SensitiveField
     @TableField(value = "hero_name", keepGlobalFormat = true)
     protected String heroName;
 
